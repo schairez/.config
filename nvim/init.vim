@@ -12,8 +12,13 @@ Plug 'junegunn/goyo.vim'
 Plug 'tpope/vim-markdown'
 "Plug 'preservim/nerdtree'
 Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries'}
+
+"LSP
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
+Plug 'tjdevries/nlua.nvim'
+Plug 'tjdevries/lsp_extensions.nvim'
+
 Plug 'honza/vim-snippets'
 Plug '9mm/vim-closer' 
 
@@ -81,12 +86,24 @@ set wildmode=longest,list   " get bash-like tab completions
 "set cc=80                   " set an 80 column border for good coding style
 filetype plugin indent on   " allows auto-indenting depending on file type
 syntax on                   " syntax highlighting
-
 inoremap jk <ESC>
-
 set cursorline
 set showcmd 
 set number relativenumber 
+set nu
+set nohlsearch
+set hidden 
+set noswapfile
+set nobackup
+set undodir=~/.vim/undodir
+set undofile 
+
+" <TAB>: completion.
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+
+"lsp settings
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+set completeopt=menuone,noinsert,noselect
 
 " Telescope shortcuts 
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>

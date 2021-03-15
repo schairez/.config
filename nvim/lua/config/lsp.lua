@@ -1,8 +1,7 @@
 
 local nvim_lsp = require('lspconfig')
-local on_attach = function(_, bufnr)
-  require('completion').on_attach()
-end 
+
+local on_attach = require'completion'.on_attach
 
 
 local servers = {'gopls', 'jsonls', 'pyls_ms', 'rust_analyzer', 'tsserver'}
