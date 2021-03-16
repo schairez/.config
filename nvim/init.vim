@@ -48,19 +48,19 @@ Plug 'nvim-telescope/telescope.nvim'
 call plug#end()
 
 lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
+lua require'nvim-web-devicons'.setup {default = true}
+
 
 set termguicolors
 
-"colorscheme nord 
 
-
-  "local servers = {'gopls', 'jsonls', 'pyls_ms', 'vimls', 'sumneko_lua', 'tsserver'}
 
 "lua require('config.telescope')
 lua require('config.lsp')
 lua require('lua_config')
 
 command! Format execute 'lua vim.lsp.buf.formatting()'
+
 
 
 " configure treesitter
@@ -78,8 +78,7 @@ EOF
 let g:nvcode_termcolors=256
 
 syntax on
-"aurora
-"gruvbox
+
 colorscheme aurora
 
 
@@ -90,20 +89,6 @@ if (has("termguicolors"))
 endif
 
 
-" 
-" :lua << EOF
-"   local nvim_lsp = require('lspconfig')
-"   local on_attach = function(_, bufnr)
-"     require('completion').on_attach()
-"   end 
-"   local servers = {'gopls', 'jsonls', 'pyls_ms'}
-"   for _, lsp in ipairs(servers) do
-"    nvim_lsp[lsp].setup {
-"      on_attach = on_attach,
-"    }
-"  end 
-" EOF
-" 
 
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType go setlocal ts=4 sts=4 sw=4 expandtab
@@ -152,6 +137,7 @@ set completeopt=menuone,noinsert,noselect
 
 " Avoid showing message extra message when using completion
 set shortmess+=c
+
 
 
 " Telescope shortcuts 
