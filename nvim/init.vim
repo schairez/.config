@@ -22,6 +22,7 @@ Plug 'tjdevries/lsp_extensions.nvim'
 Plug 'honza/vim-snippets'
 Plug '9mm/vim-closer' 
 
+Plug 'kyazdani42/nvim-web-devicons'
 " telescope 
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -41,8 +42,8 @@ colorscheme nord
 
   "local servers = {'gopls', 'jsonls', 'pyls_ms', 'vimls', 'sumneko_lua', 'tsserver'}
 
-lua require('lua_config')
 lua require('config.lsp')
+lua require('lua_config')
 
 command! Format execute 'lua vim.lsp.buf.formatting()'
 
@@ -110,4 +111,5 @@ nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+nnoremap <leader>vrc :lua require('lua_config').search_dotfiles()<CR>
 
