@@ -23,7 +23,10 @@ Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries'}
 
 "LSP
 Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/completion-nvim'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/nvim-compe'
+
+"Plug 'nvim-lua/completion-nvim'
 Plug 'tjdevries/nlua.nvim'
 Plug 'tjdevries/lsp_extensions.nvim'
 
@@ -56,6 +59,7 @@ set termguicolors
 
 
 "lua require('config.telescope')
+
 lua require('config.lsp')
 lua require('lua_config')
 
@@ -133,7 +137,9 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 "lsp settings
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
-set completeopt=menuone,noinsert,noselect
+set completeopt=menuone,noselect
+"set completeopt=menuone,noinsert,noselect
+
 
 " Avoid showing message extra message when using completion
 set shortmess+=c
