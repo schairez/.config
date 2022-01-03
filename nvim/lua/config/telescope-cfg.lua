@@ -2,28 +2,60 @@ local actions = require('telescope.actions')
 -- Global remapping
 ------------------------------
 -- '--color=never',
-require('telescope').load_extension('media_files')
+--require('telescope').load_extension('media_files')
 require('telescope').setup {
+  --   extensions = {
+  --   fzf = {
+  --     fuzzy = true,
+  --     override_generic_sorter = false,
+  --     override_file_sorter = true,
+  --     case_mode = "smart_case"
+  --   }
+  -- },
     defaults = {
-        vimgrep_arguments = {'rg', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case'},
-        prompt_position = "top",
-        prompt_prefix = " ",
-        selection_caret = " ",
+        vimgrep_arguments = {
+          'rg',
+          '--no-heading',
+          '--with-filename',
+          '--line-number',
+          '--column',
+          '--smart-case'
+        },
+        --prompt_position = "top",
+        prompt_prefix = " >",
+        selection_caret = "  ",
         entry_prefix = "  ",
         initial_mode = "insert",
         selection_strategy = "reset",
         sorting_strategy = "descending",
         layout_strategy = "horizontal",
-        layout_defaults = {horizontal = {mirror = false}, vertical = {mirror = false}},
+        layout_config = {
+          horizontal = {
+            prompt_position = "top", 
+            preview_width = 0.55,
+            results_width = 0.8,
+            --mirror = false,
+          },
+          vertical = {
+            mirror = false, 
+            --width = 0.5
+          }, 
+          width = 0.87,
+          height = 0.80,
+          preview_cutoff = 120
+        },
+        --layout_defaults = {horizontal = {mirror = false}, vertical = {mirror = false}},
         file_sorter = require'telescope.sorters'.get_fuzzy_file,
         file_ignore_patterns = {},
         generic_sorter = require'telescope.sorters'.get_generic_fuzzy_sorter,
-        shorten_path = true,
+        path_display = {
+        'shorten',
+        'absolute',
+        },
         winblend = 0,
-        width = 0.75,
-        preview_cutoff = 120,
-        results_height = 1,
-        results_width = 0.8,
+        -- preview_cutoff = 120,
+        --results_height = 1,
+        --results_width = 0.8,
         border = {},
         borderchars = {'─', '│', '─', '│', '╭', '╮', '╯', '╰'},
         color_devicons = true,
@@ -60,14 +92,17 @@ require('telescope').setup {
             }
         }
     },
-    require'telescope'.setup {
-        extensions = {
-            media_files = {
-                -- filetypes whitelist
-                -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
-                filetypes = {"png", "webp", "jpg", "jpeg"},
-                find_cmd = "rg" -- find command (defaults to `fd`)
-            }
-        }
-    }
 }
+--require('telescope').load_extension('fzf')
+
+local M = {}
+M.search_dotfiles = function()
+  require("telescope.builtin").find_files({
+    prompt_title = "< VimRC >",
+    cwd = "$HOME/.config/nvim",
+    file_ignore_patterns = {"lua%-language%-server/.*", "autoload/.*"}
+  })
+end
+
+return M
+
